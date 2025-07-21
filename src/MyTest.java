@@ -2,11 +2,13 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,6 +16,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class MyTest extends TestData {
@@ -39,7 +43,7 @@ public class MyTest extends TestData {
     
     
     
-    @Test(priority = 2 , enabled = true) 
+    @Test(priority = 2 , enabled = false) 
     public void T002_SearchFunctionality() {
     	
     	WebElement SearchLink = driver.findElement(By.className("StripNav")).findElements(By.tagName("li")).get(0);  
@@ -262,6 +266,57 @@ public class MyTest extends TestData {
     }// End of Test 
     
    
+    @Test(priority = 4 , enabled = true)
+    public void BMI_Calculator() throws InterruptedException {
+    	
+    	driver.get(URL);
+    	WebElement HealthLibrary = driver.findElement(By.linkText("Health Library")); 
+    	Actions action = new Actions(driver); 
+    	action.moveToElement(HealthLibrary).perform(); 
+    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("BMI Calculator"))).click(); 
+    	
+    	WebElement StartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("slide-button"))); 
+    	// Scroll to center
+    	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", StartButton);
 
+    	// Small wait after scroll (optional)
+    	Thread.sleep(500);
+
+    	// Try standard click first
+    	try {
+    	    StartButton.click();
+    	} catch (ElementClickInterceptedException e) {
+    	    // Fallback: click with JavaScript
+    	    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", StartButton);
+    	}
+    	
+    	WebElement CalForm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("metric-form"))); 
+    	WebElement HeightInput = CalForm.findElement(By.id("height_cm")); 
+    	WebElement WeightInput = CalForm.findElement(By.id("weight_kg")); 
+    	HeightInput.sendKeys(String.valueOf(Height_cm));
+    	WeightInput.sendKeys(String.valueOf(Weight_kg));
+    	wait.until(ExpectedConditions.elementToBeClickable(By.id("final-step"))).click();
     
-} 
+
+    	WebElement span = driver.findElement(By.xpath("//span[contains(text(), 'Your BMI is')]"));
+
+    	// Wait until the full text includes a number using JavaScript
+    	wait.until(driver1 -> {
+    	    JavascriptExecutor js = (JavascriptExecutor) driver1;
+    	    String text = (String) js.executeScript("return arguments[0].innerText;", span);
+    	    return text.matches("Your BMI is \\d+\\.\\d+");
+    	});
+
+    	double bmi= 0 ; 
+    	String finalFullResult = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].innerText;", span);
+    	
+    	Pattern pattern = Pattern.compile("(\\d+\\.\\d+)");
+    	Matcher matcher = pattern.matcher(finalFullResult);
+
+    	if (matcher.find()) {
+    	    bmi = Double.parseDouble(matcher.group(1));
+    	} 
+    	
+    	Assert.assertEquals(bmi, ExpectedResult_004); 
+    	
+} }

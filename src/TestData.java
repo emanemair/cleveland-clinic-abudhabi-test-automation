@@ -1,5 +1,6 @@
 import java.time.Duration;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -41,5 +42,19 @@ public class TestData {
 	Boolean HealthInsurance = false; 
 	String WhyVisit = "I have many gut problems";
 	//Test 004 
-	Boolean ExpectedResult_004 = true; 
+	double Height_cm = 164; 
+	double  Weight_kg = 57; 
+
+
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+	
+	public double  BMI(double height, double weight) {
+		
+		  double heightM = height / 100.0;  // convert cm to meters
+		    double bmi = weight / (heightM * heightM);
+		    bmi = Math.round(bmi * 10.0) / 10.0; 
+		    return bmi;
+	}
+	double ExpectedResult_004 = BMI(Height_cm , Weight_kg) ; 
 }
