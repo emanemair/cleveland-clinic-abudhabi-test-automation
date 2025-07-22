@@ -5,8 +5,8 @@
     <classes>
       <class name="MyTest">
         <methods>
+          <include name="checkBrokenLinks"/>
           <include name="Mysetup"/>
-          <include name="BMI_Calculator"/>
         </methods>
       </class> <!-- MyTest -->
     </classes>

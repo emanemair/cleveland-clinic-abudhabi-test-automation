@@ -1,3 +1,5 @@
+import java.net.HttpURLConnection;
+import java.net.URI;
 import java.time.Duration;
 import java.util.List;
 
@@ -18,6 +20,8 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.net.URL;
+import java.net.URL;
 
 
 public class MyTest extends TestData {
@@ -31,21 +35,79 @@ public class MyTest extends TestData {
 	  driver.manage().window().maximize(); 
 	        	
 	 }
-    @Test(priority = 1 , enabled = false)
-    public void T001_WebsiteLang_en() {
+	 
+	 @Test(priority = 1 , enabled = true)
+	    public void HomePageLoaded() {
+		 
+		 driver.get(URL);
+		 // Navigation Bar
+		 WebElement NavBar = driver.findElement(By.className("MainNavigation")); 
+		 Assert.assertTrue(NavBar.isDisplayed() , "Navigation bar should be visible");
+		 
+		 //Banner 
+		 List <WebElement> Banners = driver.findElements(By.cssSelector("section.HeroSection , section.PatientStories , section.AboutSection , section.InsurancePartnerSection"));
+		 
+
+		 for (WebElement banner : Banners)
+		 {
+			 if(!banner.isDisplayed()) {
+				 
+				 bannerIsVisible = false; 
+				 break; 
+			 }
+			 
+		 }
+		 
+		 Assert.assertTrue(bannerIsVisible , "All Banners Should be Visible");
+		 
+		 //Footer 
+		 WebElement Footer = driver.findElement(By.tagName("footer")); 
+		 Assert.assertTrue(Footer.isDisplayed() , "Footer Should be Visible");
+				 
+		 
+	    }
+	 
+	 @Test(priority = 2 , enabled =true) 
+	 public void NavigationFunctionality() {
+	
+		 driver.get(URL);
+		 for (String  linkText : navItems.keySet() ) {
+			 
+			 String expectedURLpart = navItems.get(linkText);
+	         driver.get("https://www.clevelandclinicabudhabi.ae/en");
+	         
+	         WebElement navLink = wait.until(ExpectedConditions.elementToBeClickable(By.linkText(linkText)));
+	            navLink.click();
+	         
+	            wait.until(ExpectedConditions.urlContains(expectedURLpart));
+	            String currentUrl = driver.getCurrentUrl();
+
+	            Assert.assertTrue(currentUrl.contains(expectedURLpart), "❌ Navigation to "  + linkText + " failed. URL was: " + currentUrl );
+		 }
+		 
+		 driver.get(URL);
+	 }
+	 
+	 
+    @Test(priority = 3 , enabled = true)
+    public void T003_WebsiteLang_en() {
     	
     	
-    	String ActualLang_001 = driver.findElement(By.tagName("html")).getDomAttribute("lang"); 
+    	driver.get(URL);
+    	String ActualLang_003 = driver.findElement(By.tagName("html")).getDomAttribute("lang"); 
     	
-    	Assert.assertEquals(ActualLang_001, ExpectedLang_001);
+    	Assert.assertEquals(ActualLang_003, ExpectedLang_003);
     	
+   
     }
     
+   
     
     
-    @Test(priority = 2 , enabled = false) 
-    public void T002_SearchFunctionality() {
+    @Test(priority = 4, enabled = true) 
+    public void T004_SearchFunctionality() {
     	
+    	driver.get(URL) ;
     	WebElement SearchLink = driver.findElement(By.className("StripNav")).findElements(By.tagName("li")).get(0);  
     	SearchLink.click(); 
     	
@@ -57,14 +119,15 @@ public class MyTest extends TestData {
     	WebElement SearchResultElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("txtResult"))); 
     	String SearchResultText = SearchResultElement.getText(); 
     	
-    	boolean ActualResult_002 = SearchResultText.toLowerCase().contains(SearchKeyInput); 
+    	boolean ActualResult_004 = SearchResultText.toLowerCase().contains(SearchKeyInput); 
     	
-    	Assert.assertEquals(ActualResult_002, ExpectedResult_002);
+    	Assert.assertEquals(ActualResult_004, ExpectedResult_004);
     }
     
-    @Test(priority = 3 , enabled = false)
+    @Test(priority = 5 , enabled = true)
     public void T003_ReqAppointment() throws InterruptedException {
     	
+    	driver.get(URL);
     	driver.findElement(By.linkText("Request an Appointment")).click(); 
     	WebElement AppointmentForm =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("online-forms"))); 
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", AppointmentForm);
@@ -266,7 +329,7 @@ public class MyTest extends TestData {
     }// End of Test 
     
    
-    @Test(priority = 4 , enabled = true)
+    @Test(priority = 6 , enabled = true)
     public void BMI_Calculator() throws InterruptedException {
     	
     	driver.get(URL);
@@ -317,6 +380,6 @@ public class MyTest extends TestData {
     	    bmi = Double.parseDouble(matcher.group(1));
     	} 
     	
-    	Assert.assertEquals(bmi, ExpectedResult_004); 
+    	Assert.assertEquals(bmi, ExpectedResult_006); 
     	
 } }

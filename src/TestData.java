@@ -1,4 +1,7 @@
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,14 +17,29 @@ public class TestData {
 	String URL  = "https://www.clevelandclinicabudhabi.ae"; 
     WebDriver driver = new ChromeDriver();
 	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
+	Random rand= new Random();
 
-   
-    //Test001
-	String ExpectedLang_001 = "en"; 
 
-	//Test002
+   // HomePageLoaded
+	 boolean bannerIsVisible = true;
+	 
+	 //Top Navigation Bar 
+	    protected static final Map<String, String> navItems = new HashMap<>();
+
+	    static {
+	        navItems.put("About Us", "/en/about-us");
+	        navItems.put("Patients & Visitors", "/en/patients-and-visitors");
+	        navItems.put("Institutes & Departments", "/en/institutes-and-specialties");
+	        navItems.put("Find a Doctor", "/en/find-a-doctor");
+	        navItems.put("Health Library", "/en/health-hub"); 
+	        
+	    }
+    //Test003 
+	String ExpectedLang_003 = "en"; 
+
+	//Test004
 	String SearchKeyInput = "cancer"; 
-	boolean ExpectedResult_002 = true;
+	boolean ExpectedResult_004 = true;
 	
 	//Test003 
 	
@@ -56,5 +74,5 @@ public class TestData {
 		    bmi = Math.round(bmi * 10.0) / 10.0; 
 		    return bmi;
 	}
-	double ExpectedResult_004 = BMI(Height_cm , Weight_kg) ; 
+	double ExpectedResult_006 = BMI(Height_cm , Weight_kg) ; 
 }

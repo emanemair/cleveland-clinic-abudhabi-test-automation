@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="3" total="4" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-07-21T14:23:40 EET" name="Default suite" finished-at="2025-07-21T14:23:56 EET" duration-ms="16791">
+  <suite started-at="2025-07-22T12:29:32 EET" name="Default suite" finished-at="2025-07-22T12:31:22 EET" duration-ms="109604">
     <groups>
     </groups>
-    <test started-at="2025-07-21T14:23:40 EET" name="Default test" finished-at="2025-07-21T14:23:56 EET" duration-ms="16791">
+    <test started-at="2025-07-22T12:29:32 EET" name="Default test" finished-at="2025-07-22T12:31:22 EET" duration-ms="109604">
       <class name="MyTest">
-        <test-method is-config="true" signature="Mysetup()[pri:0, instance:MyTest@5f9678e1]" started-at="2025-07-21T14:23:40 EET" name="Mysetup" finished-at="2025-07-21T14:23:46 EET" duration-ms="6425" status="PASS">
+        <test-method is-config="true" signature="Mysetup()[pri:0, instance:MyTest@5f9678e1]" started-at="2025-07-22T12:29:32 EET" name="Mysetup" finished-at="2025-07-22T12:29:47 EET" duration-ms="15050" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Mysetup -->
-        <test-method signature="BMI_Calculator()[pri:4, instance:MyTest@5f9678e1]" started-at="2025-07-21T14:23:46 EET" name="BMI_Calculator" finished-at="2025-07-21T14:23:56 EET" duration-ms="10316" status="PASS">
+        <test-method signature="HomePageLoaded()[pri:1, instance:MyTest@5f9678e1]" started-at="2025-07-22T12:29:47 EET" name="HomePageLoaded" finished-at="2025-07-22T12:29:51 EET" duration-ms="3369" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- HomePageLoaded -->
+        <test-method signature="NavigationFunctionality()[pri:2, instance:MyTest@5f9678e1]" started-at="2025-07-22T12:29:51 EET" name="NavigationFunctionality" finished-at="2025-07-22T12:30:30 EET" duration-ms="39894" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- NavigationFunctionality -->
+        <test-method signature="T003_WebsiteLang_en()[pri:3, instance:MyTest@5f9678e1]" started-at="2025-07-22T12:30:30 EET" name="T003_WebsiteLang_en" finished-at="2025-07-22T12:30:35 EET" duration-ms="4778" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- T003_WebsiteLang_en -->
+        <test-method signature="T004_SearchFunctionality()[pri:4, instance:MyTest@5f9678e1]" started-at="2025-07-22T12:30:35 EET" name="T004_SearchFunctionality" finished-at="2025-07-22T12:30:44 EET" duration-ms="9002" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- T004_SearchFunctionality -->
+        <test-method signature="T003_ReqAppointment()[pri:5, instance:MyTest@5f9678e1]" started-at="2025-07-22T12:30:44 EET" name="T003_ReqAppointment" finished-at="2025-07-22T12:31:02 EET" duration-ms="17601" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- T003_ReqAppointment -->
+        <test-method signature="BMI_Calculator()[pri:6, instance:MyTest@5f9678e1]" started-at="2025-07-22T12:31:02 EET" name="BMI_Calculator" finished-at="2025-07-22T12:31:22 EET" duration-ms="19790" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- BMI_Calculator -->
