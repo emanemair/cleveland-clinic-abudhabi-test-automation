@@ -16,7 +16,7 @@ This project is an automated UI test suite for verifying the functionality of th
 - Java
 - Selenium WebDriver
 - TestNG
-- Maven (optional)
+- Maven 
 - ChromeDriver
 - JavaScriptExecutor (for complex interactions)
 
